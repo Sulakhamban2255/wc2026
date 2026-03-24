@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>FIFA World Cup 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700;900&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300&display=swap');
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --gold:#FFD700;--red:#C8102E;--blue:#00237D;
+  --dark:#04061C;--card:#0b0e2a;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Barlow',sans-serif;background:#000;color:#e0e4f4;overflow-x:hidden;}
+
+/* ═══════════════════════════════
+   HERO CARD  (full viewport)
+═══════════════════════════════ */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding:40px 24px 32px;
+  background:var(--dark);
+}
+
+/* animated bg layers */
+.hero-bg{position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% -5%, rgba(0,35,125,0.95) 0%,transparent 60%),
+    radial-gradient(ellipse 80% 45% at 8%  90%, rgba(200,16,46,0.45) 0%,transparent 55%),
+    radial-gradient(ellipse 70% 45% at 92% 85%, rgba(0,35,125,0.4)  0%,transparent 55%),
+    linear-gradient(168deg,#06092a 0%,#04061c 50%,#090412 100%);
+}
+.hero-grid{position:absolute;inset:0;z-index:1;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px);
+  background-size:36px 36px;
+}
+.hero-glow{
+  position:absolute;z-index:2;top:-100px;left:50%;transform:translateX(-50%);
+  width:min(500px,110vw);height:340px;
+  background:radial-gradient(ellipse,rgba(255,215,0,0.11) 0%,transparent 70%);
+  animation:gp 5s ease-in-out infinite;
+}
+@keyframes gp{0%,100%{opacity:.5;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.18)}}
+
+.hero-inner{position:relative;z-index:10;width:100%;max-width:460px;display:flex;flex-direction:column;align-items:center;gap:0;}
+
+/* flag strip */
+.flags{display:flex;gap:14px;margin-bottom:18px;}
+.flags span{font-size:min(2em,8vw);filter:drop-shadow(0 2px 8px rgba(0,0,0,.7));}
+
+/* eyebrow */
+.eyebrow{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:min(.7em,3vw);font-weight:600;letter-spacing:5px;text-transform:uppercase;
+  color:var(--gold);opacity:.7;margin-bottom:10px;text-align:center;
+}
+
+/* trophy */
+.trophy-wrap{position:relative;margin-bottom:8px;}
+.trophy-glow{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:160px;height:160px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,215,0,0.22) 0%,transparent 70%);
+  animation:tg 3s ease-in-out infinite;
+}
+@keyframes tg{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7}50%{transform:translate(-50%,-50%) scale(1.3);opacity:1}}
+.trophy-icon{font-size:min(5em,18vw);line-height:1;position:relative;z-index:1;}
+
+/* title */
+.main-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:min(4.2em,16vw);
+  letter-spacing:5px;line-height:.9;text-align:center;color:#fff;
+  text-shadow:0 2px 40px rgba(255,215,0,.2);
+  margin-bottom:4px;
+}
+.main-year{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:min(6em,22vw);
+  letter-spacing:6px;line-height:.85;
+  color:var(--gold);display:block;text-align:center;
+  text-shadow:0 0 60px rgba(255,215,0,.55),0 4px 20px rgba(0,0,0,.5);
+}
+.tagline{
+  font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:300;
+  font-size:min(1.05em,4.5vw);color:rgba(255,255,255,.4);
+  text-align:center;margin:10px 0 0;letter-spacing:1px;
+}
+
+/* divider */
+.div{
+  width:100%;height:1px;margin:20px 0;
+  background:linear-gradient(90deg,transparent,rgba(255,215,0,.5),transparent);
+}
+
+/* stats */
+.stats{display:flex;justify-content:center;gap:min(22px,4vw);margin-bottom:20px;width:100%;}
+.stat{
+  flex:1;max-width:100px;text-align:center;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,215,0,.1);
+  border-radius:12px;padding:10px 6px 8px;
+}
+.stat-n{
+  font-family:'Bebas Neue',sans-serif;font-size:min(2.2em,8vw);
+  color:var(--gold);line-height:1;text-shadow:0 0 20px rgba(255,215,0,.4);
+}
+.stat-l{font-family:'Barlow Condensed',sans-serif;font-size:min(.6em,2.5vw);letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:2px;}
+
+/* catch copy */
+.catch{font-size:min(1.05em,4.5vw);font-weight:700;text-align:center;color:#fff;line-height:1.5;margin-bottom:6px;}
+.catch em{font-style:normal;color:var(--gold);}
+.subcatch{font-size:min(.78em,3.3vw);font-weight:300;color:rgba(255,255,255,.38);text-align:center;line-height:1.65;margin-bottom:22px;}
+
+/* countdown in card */
+.mini-cd{display:flex;justify-content:center;gap:min(10px,3vw);margin-bottom:22px;width:100%;}
+.mcd{
+  flex:1;max-width:90px;
+  background:linear-gradient(145deg,#0b1545,#07102e);
+  border:1px solid rgba(100,140,255,.22);border-radius:12px;
+  padding:12px 4px 8px;text-align:center;position:relative;overflow:hidden;
+}
+.mcd::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,215,0,.5),transparent);}
+.mcd-n{font-family:'Bebas Neue',sans-serif;font-size:min(2.2em,8vw);color:#fff;line-height:1;text-shadow:0 0 25px rgba(120,160,255,.6);}
+.mcd-l{font-family:'Barlow Condensed',sans-serif;font-size:min(.58em,2.4vw);letter-spacing:2px;text-transform:uppercase;color:#6080c0;margin-top:3px;}
+
+/* opening pill */
+.open-pill{
+  width:100%;margin-bottom:18px;
+  background:rgba(200,16,46,.1);border:1px solid rgba(200,16,46,.35);
+  border-radius:50px;padding:10px 16px;text-align:center;
+}
+.open-pill .lbl{font-size:min(.65em,2.8vw);font-family:'Barlow Condensed',sans-serif;letter-spacing:3px;text-transform:uppercase;color:#ff6b6b;}
+.open-pill .match{font-size:min(.85em,3.8vw);font-weight:700;color:#fff;margin-top:2px;}
+.open-pill .detail{font-size:min(.7em,3vw);color:rgba(255,255,255,.38);margin-top:1px;}
+
+/* CTA BUTTON */
+.cta{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:min(18px,4.5vw) 0;
+  background:linear-gradient(135deg,#b8960a 0%,#FFD700 50%,#e8a800 100%);
+  border:none;border-radius:16px;cursor:pointer;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:min(1.5em,6vw);letter-spacing:3px;color:#000;
+  text-align:center;text-decoration:none;
+  box-shadow:0 8px 32px rgba(255,215,0,.35);
+  transition:transform .15s,box-shadow .15s;
+  position:relative;overflow:hidden;
+}
+.cta::after{
+  content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+  animation:shine 3s ease-in-out infinite;
+}
+@keyframes shine{0%{left:-100%}60%,100%{left:150%}}
+.cta:active{transform:scale(.97);}
+.cta-arrow{font-size:1.1em;animation:bounce 1.5s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+.hero-footer{margin-top:18px;font-size:min(.58em,2.4vw);letter-spacing:2px;color:rgba(255,255,255,.12);text-transform:uppercase;text-align:center;}
+
+/* ═══════════════════════════════
+   SCHEDULE SECTION
+═══════════════════════════════ */
+#schedule{background:var(--dark);}
+
+.sch-banner{
+  background:linear-gradient(155deg,#000d42 0%,#001f8c 45%,#8b0000 100%);
+  padding:min(30px,6vw) 20px min(22px,4vw);text-align:center;
+  position:relative;overflow:hidden;
+}
+.sch-banner::after{content:'';position:absolute;inset:0;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 34px,rgba(255,255,255,.018) 34px,rgba(255,255,255,.018) 35px),
+    repeating-linear-gradient(90deg,transparent,transparent 34px,rgba(255,255,255,.018) 34px,rgba(255,255,255,.018) 35px);}
+.sch-inner{position:relative;z-index:1;}
+.sch-badge{display:inline-block;background:rgba(255,215,0,.11);border:1px solid rgba(255,215,0,.32);color:var(--gold);
+  font-family:'Barlow Condensed',sans-serif;font-size:min(.68em,3vw);letter-spacing:4px;text-transform:uppercase;
+  padding:4px 14px;border-radius:20px;margin-bottom:10px;}
+.sch-h1{font-family:'Bebas Neue',sans-serif;font-size:min(3em,11vw);letter-spacing:4px;color:#fff;}
+.sch-h1 span{color:var(--gold);}
+.sch-sub{font-family:'Barlow Condensed',sans-serif;font-size:min(.8em,3.4vw);letter-spacing:2px;color:rgba(255,255,255,.45);text-transform:uppercase;margin-top:4px;}
+
+/* full countdown */
+.cd-wrap{background:linear-gradient(180deg,#020824 0%,var(--dark) 100%);
+  padding:min(24px,5vw) 16px min(20px,4vw);text-align:center;
+  border-bottom:1px solid rgba(255,215,0,.14);}
+.cd-lbl{font-family:'Barlow Condensed',sans-serif;font-size:min(.7em,3vw);letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.cd-row{display:flex;justify-content:center;gap:min(10px,2.5vw);flex-wrap:wrap;}
+.cd-box{background:linear-gradient(145deg,#0b1545,#07102e);border:1px solid rgba(100,140,255,.2);
+  border-radius:12px;padding:min(14px,3vw) min(16px,4vw) min(10px,2.5vw);min-width:min(74px,18vw);
+  position:relative;overflow:hidden;}
+.cd-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,215,0,.4),transparent);}
+.cd-n{font-family:'Bebas Neue',sans-serif;font-size:min(2.6em,9vw);color:#fff;line-height:1;text-shadow:0 0 30px rgba(120,160,255,.6);}
+.cd-u{font-family:'Barlow Condensed',sans-serif;font-size:min(.6em,2.5vw);letter-spacing:2px;text-transform:uppercase;color:#6080c0;margin-top:4px;}
+.cd-note{margin-top:12px;font-size:min(.73em,3vw);color:rgba(255,255,255,.3);line-height:1.55;}
+.cd-note strong{color:rgba(255,215,0,.8);}
+
+/* container */
+.sc{max-width:1100px;margin:0 auto;padding:16px 12px 40px;}
+
+.phase{
+  font-family:'Bebas Neue',sans-serif;font-size:min(1.4em,6vw);letter-spacing:3px;color:var(--gold);
+  margin:26px 0 10px;padding-bottom:7px;
+  border-bottom:2px solid rgba(255,215,0,.2);
+  display:flex;align-items:center;gap:8px;
+}
+.phase small{font-family:'Barlow Condensed',sans-serif;font-size:.43em;color:rgba(255,255,255,.25);letter-spacing:2px;font-weight:400;}
+
+.tw{overflow-x:auto;border-radius:8px;-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;font-size:min(.8em,3.4vw);min-width:520px;}
+thead tr{background:rgba(0,48,135,.4);}
+thead th{font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  font-size:.78em;color:rgba(255,255,255,.4);padding:9px 8px;text-align:left;
+  border-bottom:1px solid rgba(255,255,255,.06);white-space:nowrap;}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.032);transition:background .12s;}
+tbody tr:hover{background:rgba(255,255,255,.04);}
+tbody tr:nth-child(even){background:rgba(255,255,255,.01);}
+tbody td{padding:7px 8px;vertical-align:middle;line-height:1.3;}
+.tn{color:rgba(255,255,255,.16);font-size:.74em;font-weight:600;width:28px;}
+.tg{width:36px;}
+.gb{display:inline-block;background:rgba(255,215,0,.09);border:1px solid rgba(255,215,0,.2);
+  color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-size:.75em;font-weight:700;
+  letter-spacing:1px;padding:2px 5px;border-radius:4px;}
+.tm{font-weight:600;color:#dce6ff;}
+.vs{color:rgba(255,255,255,.2);font-weight:300;margin:0 3px;font-size:.88em;}
+.td{color:rgba(255,255,255,.48);white-space:nowrap;}
+.tt{color:#7090d0;white-space:nowrap;}
+.tv{color:rgba(255,255,255,.28);font-size:.82em;}
+.tc{color:rgba(255,255,255,.4);}
+
+.row-r16 td{color:#c8d8ff;}
+.row-qf  td{color:#d4e0ff;}
+.row-sf  td{background:rgba(255,215,0,.04);color:#ead870;}
+.row-3p  td{background:rgba(200,16,46,.05);}
+.row-fin td{background:rgba(255,215,0,.09);}
+.row-fin .tm{color:var(--gold);font-size:1.04em;}
+
+.sfooter{text-align:center;padding:20px 16px;font-size:min(.64em,2.7vw);color:rgba(255,255,255,.1);letter-spacing:1px;border-top:1px solid rgba(255,255,255,.04);margin-top:16px;}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════
+     HERO CARD
+═══════════════════════ -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-inner">
+
+    <div class="flags">
+      <span>🇺🇸</span><span>🇨🇦</span><span>🇲🇽</span>
+    </div>
+
+    <div class="eyebrow">The Greatest Show on Earth</div>
+
+    <div class="trophy-wrap">
+      <div class="trophy-glow"></div>
+      <div class="trophy-icon">🏆</div>
+    </div>
+
+    <div class="main-title">FIFA World Cup</div>
+    <span class="main-year">2026</span>
+    <div class="tagline">48 Nations. One Dream. No Limits.</div>
+
+    <div class="div"></div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-n">48</div><div class="stat-l">Teams</div></div>
+      <div class="stat"><div class="stat-n">104</div><div class="stat-l">Matches</div></div>
+      <div class="stat"><div class="stat-n">16</div><div class="stat-l">Venues</div></div>
+      <div class="stat"><div class="stat-n">3</div><div class="stat-l">Nations</div></div>
+    </div>
+
+    <div class="catch">
+      Every kick. Every goal. Every miracle.<br>
+      <em>Don't miss a single moment.</em>
+    </div>
+    <div class="subcatch">
+      Tap below for the full schedule —<br>
+      all 104 matches with a live countdown.
+    </div>
+
+    <!-- mini countdown -->
+    <div class="mini-cd">
+      <div class="mcd"><div class="mcd-n" id="h1">--</div><div class="mcd-l">Days</div></div>
+      <div class="mcd"><div class="mcd-n" id="h2">--</div><div class="mcd-l">Hours</div></div>
+      <div class="mcd"><div class="mcd-n" id="h3">--</div><div class="mcd-l">Mins</div></div>
+      <div class="mcd"><div class="mcd-n" id="h4">--</div><div class="mcd-l">Secs</div></div>
+    </div>
+
+    <div class="open-pill">
+      <div class="lbl">🔥 Opening Match</div>
+      <div class="match">Mexico v South Africa</div>
+      <div class="detail">11 Jun 2026 · 15:00 EST · Estadio Azteca, Mexico City</div>
+    </div>
+
+    <!-- THE BUTTON — scrolls to schedule on same page -->
+    <a class="cta" href="#schedule">
+      ⚽ VIEW FULL SCHEDULE
+      <span class="cta-arrow">↓</span>
+    </a>
+
+    <div class="hero-footer">FIFA World Cup 2026 · USA · Canada · Mexico</div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════
+     FULL SCHEDULE
+═══════════════════════ -->
+<div id="schedule">
+
+  <div class="sch-banner">
+    <div class="sch-inner">
+      <div class="sch-badge">⚽ Complete Match Schedule</div>
+      <div class="sch-h1">FIFA World Cup <span>2026</span></div>
+      <div class="sch-sub">104 Matches · 16 Venues · All Local Times</div>
+    </div>
+  </div>
+
+  <div class="cd-wrap">
+    <div class="cd-lbl">⚽ Live Countdown to Kick-Off</div>
+    <div class="cd-row">
+      <div class="cd-box"><div class="cd-n" id="s1">--</div><div class="cd-u">Days</div></div>
+      <div class="cd-box"><div class="cd-n" id="s2">--</div><div class="cd-u">Hours</div></div>
+      <div class="cd-box"><div class="cd-n" id="s3">--</div><div class="cd-u">Mins</div></div>
+      <div class="cd-box"><div class="cd-n" id="s4">--</div><div class="cd-u">Secs</div></div>
+    </div>
+    <div class="cd-note">Opening match · <strong>Mexico v South Africa</strong> · Thu 11 Jun 2026 · 15:00 EST · Estadio Azteca</div>
+  </div>
+
+  <div class="sc">
+
+    <div class="phase">Group Stage <small>Matchday 1 · Jun 11–17</small></div>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>Grp</th><th>Match</th><th>Date</th><th>Time</th><th>City</th><th>Venue</th></tr></thead>
+      <tbody>
+        <tr><td class="tn">1</td><td class="tg"><span class="gb">A</span></td><td class="tm">Mexico <span class="vs">v</span> South Africa</td><td class="td">11 Jun</td><td class="tt">13:00</td><td class="tc">Mexico City</td><td class="tv">Estadio Azteca</td></tr>
+        <tr><td class="tn">2</td><td class="tg"><span class="gb">A</span></td><td class="tm">South Korea <span class="vs">v</span> UEFA Winner D</td><td class="td">11 Jun</td><td class="tt">20:00</td><td class="tc">Guadalajara</td><td class="tv">Estadio Akron</td></tr>
+        <tr><td class="tn">3</td><td class="tg"><span class="gb">B</span></td><td class="tm">Canada <span class="vs">v</span> UEFA Winner A</td><td class="td">12 Jun</td><td class="tt">15:00</td><td class="tc">Toronto</td><td class="tv">BMO Field</td></tr>
+        <tr><td class="tn">4</td><td class="tg"><span class="gb">D</span></td><td class="tm">USA <span class="vs">v</span> Paraguay</td><td class="td">12 Jun</td><td class="tt">18:00</td><td class="tc">Los Angeles</td><td class="tv">SoFi Stadium</td></tr>
+        <tr><td class="tn">5</td><td class="tg"><span class="gb">C</span></td><td class="tm">Haiti <span class="vs">v</span> Scotland</td><td class="td">13 Jun</td><td class="tt">21:00</td><td class="tc">Boston</td><td class="tv">Gillette Stadium</td></tr>
+        <tr><td class="tn">6</td><td class="tg"><span class="gb">D</span></td><td class="tm">Australia <span class="vs">v</span> UEFA Winner C</td><td class="td">13 Jun</td><td class="tt">21:00</td><td class="tc">Vancouver</td><td class="tv">BC Place</td></tr>
+        <tr><td class="tn">7</td><td class="tg"><span class="gb">C</span></td><td class="tm">Brazil <span class="vs">v</span> Morocco</td><td class="td">13 Jun</td><td class="tt">18:00</td><td class="tc">New York/NJ</td><td class="tv">MetLife Stadium</td></tr>
+        <tr><td class="tn">8</td><td class="tg"><span class="gb">B</span></td><td class="tm">Qatar <span class="vs">v</span> Switzerland</td><td class="td">13 Jun</td><td class="tt">12:00</td><td class="tc">San Francisco Bay</td><td class="tv">Levi's Stadium</td></tr>
+        <tr><td class="tn">9</td><td class="tg"><span class="gb">E</span></td><td class="tm">Ivory Coast <span class="vs">v</span> Ecuador</td><td class="td">14 Jun</td><td class="tt">19:00</td><td class="tc">Philadelphia</td><td class="tv">Lincoln Financial Field</td></tr>
+        <tr><td class="tn">10</td><td class="tg"><span class="gb">E</span></td><td class="tm">Germany <span class="vs">v</span> Curaçao</td><td class="td">14 Jun</td><td class="tt">12:00</td><td class="tc">Houston</td><td class="tv">NRG Stadium</td></tr>
+        <tr><td class="tn">11</td><td class="tg"><span class="gb">F</span></td><td class="tm">Netherlands <span class="vs">v</span> Japan</td><td class="td">14 Jun</td><td class="tt">15:00</td><td class="tc">Dallas</td><td class="tv">AT&amp;T Stadium</td></tr>
+        <tr><td class="tn">12</td><td class="tg"><span class="gb">F</span></td><td class="tm">UEFA Winner B <span class="vs">v</span> Tunisia</td><td class="td">14 Jun</td><td class="tt">20:00</td><td class="tc">Monterrey</td><td class="tv">Estadio BBVA</td></tr>
+        <tr><td class="tn">13</td><td class="tg"><span class="gb">H</span></td><td class="tm">Saudi Arabia <span class="vs">v</span> Uruguay</td><td class="td">15 Jun</td><td class="tt">18:00</td><td class="tc">Miami</td><td class="tv">Hard Rock Stadium</td></tr>
+        <tr><td class="tn">14</td><td class="tg"><span class="gb">H</span></td><td class="tm">Spain <span class="vs">v</span> Cape Verde</td><td class="td">15 Jun</td><td class="tt">12:00</td><td class="tc">Atlanta</td><td class="tv">Mercedes-Benz Stadium</td></tr>
+        <tr><td class="tn">15</td><td class="tg"><span class="gb">G</span></td><td class="tm">Iran <span class="vs">v</span> New Zealand</td><td class="td">15 Jun</td><td class="tt">18:00</td><td class="tc">Los Angeles</td><td class="tv">SoFi Stadium</td></tr>
+        <tr><td class="tn">16</td><td class="tg"><span class="gb">G</span></td><td class="tm">Belgium <span class="vs">v</span> Egypt</td><td class="td">15 Jun</td><td class="tt">12:00</td><td class="tc">Seattle</td><td class="tv">Lumen Field</td></tr>
+        <tr><td class="tn">17</td><td class="tg"><span class="gb">I</span></td><td class="tm">France <span class="vs">v</span> Senegal</td><td class="td">16 Jun</td><td class="tt">15:00</td><td class="tc">New York/NJ</td><td class="tv">MetLife Stadium</td></tr>
+        <tr><td class="tn">18</td><td class="tg"><span class="gb">I</span></td><td class="tm">IC Winner 2 <span class="vs">v</span> Norway</td><td class="td">16 Jun</td><td class="tt">18:00</td><td class="tc">Boston</td><td class="tv">Gillette Stadium</td></tr>
+        <tr><td class="tn">19</td><td class="tg"><span class="gb">J</span></td><td class="tm">Argentina <span class="vs">v</span> Algeria</td><td class="td">16 Jun</td><td class="tt">20:00</td><td class="tc">Kansas City</td><td class="tv">Arrowhead Stadium</td></tr>
+        <tr><td class="tn">20</td><td class="tg"><span class="gb">J</span></td><td class="tm">Austria <span class="vs">v</span> Jordan</td><td class="td">16 Jun</td><td class="tt">21:00</td><td class="tc">San Francisco Bay</td><td class="tv">Levi's Stadium</td></tr>
+        <tr><td class="tn">21</td><td class="tg"><span class="gb">L</span></td><td class="tm">Ghana <span class="vs">v</span> Panama</td><td class="td">17 Jun</td><td class="tt">19:00</td><td class="tc">Toronto</td><td class="tv">BMO Field</td></tr>
+        <tr><td class="tn">22</td><td class="tg"><span class="gb">L</span></td><td class="tm">England <span class="vs">v</span> Croatia</td><td class="td">17 Jun</td><td class="tt">15:00</td><td class="tc">Dallas</td><td class="tv">AT&amp;T Stadium</td></tr>
+        <tr><td class="tn">23</td><td class="tg"><span class="gb">K</span></td><td class="tm">Portugal <span class="vs">v</span> IC Winner 1</td><td class="td">17 Jun</td><td class="tt">12:00</td><td class="tc">Houston</td><td class="tv">NRG Stadium</td></tr>
+        <tr><td class="tn">24</td><td class="tg"><span class="gb">K</span></td><td class="tm">Uzbekistan <span class="vs">v</span> Colombia</td><td class="td">17 Jun</td><td class="tt">20:00</td><td class="tc">Mexico City</td><td class="tv">Estadio Azteca</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="phase">Group Stage <small>Matchday 2 · Jun 18–23</small></div>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>Grp</th><th>Match</th><th>Date</th><th>Time</th><th>City</th><th>Venue</th></tr></thead>
+      <tbody>
+        <tr><td class="tn">25</td><td class="tg"><span class="gb">A</span></td><td class="tm">UEFA Winner D <span class="vs">v</span> South Africa</td><td class="td">18 Jun</td><td class="tt">12:00</td><td class="tc">Atlanta</td><td class="tv">Mercedes-Benz Stadium</td></tr>
+        <tr><td class="tn">26</td><td class="tg"><span class="gb">B</span></td><td class="tm">Switzerland <span class="vs">v</span> UEFA Winner A</td><td class="td">18 Jun</td><td class="tt">12:00</td><td class="tc">Los Angeles</td><td class="tv">SoFi Stadium</td></tr>
+        <tr><td class="tn">27</td><td class="tg"><span class="gb">B</span></td><td class="tm">Canada <span class="vs">v</span> Qatar</td><td class="td">18 Jun</td><td class="tt">15:00</td><td class="tc">Vancouver</td><td class="tv">BC Place</td></tr>
+        <tr><td class="tn">28</td><td class="tg"><span class="gb">A</span></td><td class="tm">Mexico <span class="vs">v</span> South Korea</td><td class="td">18 Jun</td><td class="tt">19:00</td><td class="tc">Guadalajara</td><td class="tv">Estadio Akron</td></tr>
+        <tr><td class="tn">29</td><td class="tg"><span class="gb">C</span></td><td class="tm">Brazil <span class="vs">v</span> Haiti</td><td class="td">19 Jun</td><td class="tt">21:00</td><td class="tc">Philadelphia</td><td class="tv">Lincoln Financial Field</td></tr>
+        <tr><td class="tn">30</td><td class="tg"><span class="gb">C</span></td><td class="tm">Scotland <span class="vs">v</span> Morocco</td><td class="td">19 Jun</td><td class="tt">18:00</td><td class="tc">Boston</td><td class="tv">Gillette Stadium</td></tr>
+        <tr><td class="tn">31</td><td class="tg"><span class="gb">D</span></td><td class="tm">UEFA Winner C <span class="vs">v</span> Paraguay</td><td class="td">19 Jun</td><td class="tt">21:00</td><td class="tc">San Francisco Bay</td><td class="tv">Levi's Stadium</td></tr>
+        <tr><td class="tn">32</td><td class="tg"><span class="gb">D</span></td><td class="tm">USA <span class="vs">v</span> Australia</td><td class="td">19 Jun</td><td class="tt">12:00</td><td class="tc">Seattle</td><td class="tv">Lumen Field</td></tr>
+        <tr><td class="tn">33</td><td class="tg"><span class="gb">E</span></td><td class="tm">Germany <span class="vs">v</span> Ivory Coast</td><td class="td">20 Jun</td><td class="tt">16:00</td><td class="tc">Toronto</td><td class="tv">BMO Field</td></tr>
+        <tr><td class="tn">34</td><td class="tg"><span class="gb">E</span></td><td class="tm">Ecuador <span class="vs">v</span> Curaçao</td><td class="td">20 Jun</td><td class="tt">19:00</td><td class="tc">Kansas City</td><td class="tv">Arrowhead Stadium</td></tr>
+        <tr><td class="tn">35</td><td class="tg"><span class="gb">F</span></td><td class="tm">Netherlands <span class="vs">v</span> UEFA Winner B</td><td class="td">20 Jun</td><td class="tt">12:00</td><td class="tc">Houston</td><td class="tv">NRG Stadium</td></tr>
+        <tr><td class="tn">36</td><td class="tg"><span class="gb">F</span></td><td class="tm">Tunisia <span class="vs">v</span> Japan</td><td class="td">20 Jun</td><td class="tt">22:00</td><td class="tc">Monterrey</td><td class="tv">Estadio BBVA</td></tr>
+        <tr><td class="tn">37</td><td class="tg"><span class="gb">H</span></td><td class="tm">Uruguay <span class="vs">v</span> Cape Verde</td><td class="td">21 Jun</td><td class="tt">18:00</td><td class="tc">Miami</td><td class="tv">Hard Rock Stadium</td></tr>
+        <tr><td class="tn">38</td><td class="tg"><span class="gb">H</span></td><td class="tm">Spain <span class="vs">v</span> Saudi Arabia</td><td class="td">21 Jun</td><td class="tt">12:00</td><td class="tc">Atlanta</td><td class="tv">Mercedes-Benz Stadium</td></tr>
+        <tr><td class="tn">39</td><td class="tg"><span class="gb">G</span></td><td class="tm">Belgium <span class="vs">v</span> Iran</td><td class="td">21 Jun</td><td class="tt">12:00</td><td class="tc">Los Angeles</td><td class="tv">SoFi Stadium</td></tr>
+        <tr><td class="tn">40</td><td class="tg"><span class="gb">G</span></td><td class="tm">New Zealand <span class="vs">v</span> Egypt</td><td class="td">21 Jun</td><td class="tt">18:00</td><td class="tc">Vancouver</td><td class="tv">BC Place</td></tr>
+        <tr><td class="tn">41</td><td class="tg"><span class="gb">I</span></td><td class="tm">Norway <span class="vs">v</span> Senegal</td><td class="td">22 Jun</td><td class="tt">20:00</td><td class="tc">New York/NJ</td><td class="tv">MetLife Stadium</td></tr>
+        <tr><td class="tn">42</td><td class="tg"><span class="gb">I</span></td><td class="tm">France <span class="vs">v</span> IC Winner 2</td><td class="td">22 Jun</td><td class="tt">17:00</td><td class="tc">Philadelphia</td><td class="tv">Lincoln Financial Field</td></tr>
+        <tr><td class="tn">43</td><td class="tg"><span class="gb">J</span></td><td class="tm">Argentina <span class="vs">v</span> Austria</td><td class="td">22 Jun</td><td class="tt">12:00</td><td class="tc">Dallas</td><td class="tv">AT&amp;T Stadium</td></tr>
+        <tr><td class="tn">44</td><td class="tg"><span class="gb">J</span></td><td class="tm">Jordan <span class="vs">v</span> Algeria</td><td class="td">22 Jun</td><td class="tt">20:00</td><td class="tc">San Francisco Bay</td><td class="tv">Levi's Stadium</td></tr>
+        <tr><td class="tn">45</td><td class="tg"><span class="gb">L</span></td><td class="tm">England <span class="vs">v</span> Ghana</td><td class="td">23 Jun</td><td class="tt">16:00</td><td class="tc">Boston</td><td class="tv">Gillette Stadium</td></tr>
+        <tr><td class="tn">46</td><td class="tg"><span class="gb">L</span></td><td class="tm">Panama <span class="vs">v</span> Croatia</td><td class="td">23 Jun</td><td class="tt">19:00</td><td class="tc">Toronto</td><td class="tv">BMO Field</td></tr>
+        <tr><td class="tn">47</td><td class="tg"><span class="gb">K</span></td><td class="tm">Portugal <span class="vs">v</span> Uzbekistan</td><td class="td">23 Jun</td><td class="tt">12:00</td><td class="tc">Houston</td><td class="tv">NRG Stadium</td></tr>
+        <tr><td class="tn">48</td><td class="tg"><span class="gb">K</span></td><td class="tm">Colombia <span class="vs">v</span> IC Winner 1</td><td class="td">23 Jun</td><td class="tt">20:00</td><td class="tc">Guadalajara</td><td class="tv">Estadio Akron</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="phase">Group Stage <small>Matchday 3 · Jun 24–27</small></div>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>Grp</th><th>Match</th><th>Date</th><th>Time</th><th>City</th><th>Venue</th></tr></thead>
+      <tbody>
+        <tr><td class="tn">49</td><td class="tg"><span class="gb">C</span></td><td class="tm">Scotland <span class="vs">v</span> Brazil</td><td class="td">24 Jun</td><td class="tt">18:00</td><td class="tc">Miami</td><td class="tv">Hard Rock Stadium</td></tr>
+        <tr><td class="tn">50</td><td class="tg"><span class="gb">C</span></td><td class="tm">Morocco <span class="vs">v</span> Haiti</td><td class="td">24 Jun</td><td class="tt">18:00</td><td class="tc">Atlanta</td><td class="tv">Mercedes-Benz Stadium</td></tr>
+        <tr><td class="tn">51</td><td class="tg"><span class="gb">B</span></td><td class="tm">Switzerland <span class="vs">v</span> Canada</td><td class="td">24 Jun</td><td class="tt">12:00</td><td class="tc">Vancouver</td><td class="tv">BC Place</td></tr>
+        <tr><td class="tn">52</td><td class="tg"><span class="gb">B</span></td><td class="tm">UEFA Winner A <span class="vs">v</span> Qatar</td><td class="td">24 Jun</td><td class="tt">12:00</td><td class="tc">Seattle</td><td class="tv">Lumen Field</td></tr>
+        <tr><td class="tn">53</td><td class="tg"><span class="gb">A</span></td><td class="tm">UEFA Winner D <span class="vs">v</span> Mexico</td><td class="td">24 Jun</td><td class="tt">19:00</td><td class="tc">Mexico City</td><td class="tv">Estadio Azteca</td></tr>
+        <tr><td class="tn">54</td><td class="tg"><span class="gb">A</span></td><td class="tm">South Africa <span class="vs">v</span> South Korea</td><td class="td">24 Jun</td><td class="tt">19:00</td><td class="tc">Monterrey</td><td class="tv">Estadio BBVA</td></tr>
+        <tr><td class="tn">55</td><td class="tg"><span class="gb">E</span></td><td class="tm">Curaçao <span class="vs">v</span> Ivory Coast</td><td class="td">25 Jun</td><td class="tt">16:00</td><td class="tc">Philadelphia</td><td class="tv">Lincoln Financial Field</td></tr>
+        <tr><td class="tn">56</td><td class="tg"><span class="gb">E</span></td><td class="tm">Ecuador <span class="vs">v</span> Germany</td><td class="td">25 Jun</td><td class="tt">16:00</td><td class="tc">New York/NJ</td><td class="tv">MetLife Stadium</td></tr>
+        <tr><td class="tn">57</td><td class="tg"><span class="gb">F</span></td><td class="tm">Japan <span class="vs">v</span> UEFA Winner B</td><td class="td">25 Jun</td><td class="tt">18:00</td><td class="tc">Dallas</td><td class="tv">AT&amp;T Stadium</td></tr>
+        <tr><td class="tn">58</td><td class="tg"><span class="gb">F</span></td><td class="tm">Tunisia <span class="vs">v</span> Netherlands</td><td class="td">25 Jun</td><td class="tt">18:00</td><td class="tc">Kansas City</td><td class="tv">Arrowhead Stadium</td></tr>
+        <tr><td class="tn">59</td><td class="tg"><span class="gb">D</span></td><td class="tm">UEFA Winner C <span class="vs">v</span> USA</td><td class="td">25 Jun</td><td class="tt">19:00</td><td class="tc">Los Angeles</td><td class="tv">SoFi Stadium</td></tr>
+        <tr><td class="tn">60</td><td class="tg"><span class="gb">D</span></td><td class="tm">Paraguay <span class="vs">v</span> Australia</td><td class="td">25 Jun</td><td class="tt">19:00</td><td class="tc">San Francisco Bay</td><td class="tv">Levi's Stadium</td></tr>
+        <tr><td class="tn">61</td><td class="tg"><span class="gb">I</span></td><td class="tm">Norway <span class="vs">v</span> France</td><td class="td">26 Jun</td><td class="tt">15:00</td><td class="tc">Boston</td><td class="tv">Gillette Stadium</td></tr>
+        <tr><td class="tn">62</td><td class="tg"><span class="gb">I</span></td><td class="tm">Senegal <span class="vs">v</span> IC Winner 2</td><td class="td">26 Jun</td><td class="tt">15:00</td><td class="tc">Toronto</td><td class="tv">BMO Field</td></tr>
+        <tr><td class="tn">63</td><td class="tg"><span class="gb">G</span></td><td class="tm">Egypt <span class="vs">v</span> Iran</td><td class="td">26 Jun</td><td class="tt">20:00</td><td class="tc">Seattle</td><td class="tv">Lumen Field</td></tr>
+        <tr><td class="tn">64</td><td class="tg"><span class="gb">G</span></td><td class="tm">New Zealand <span class="vs">v</span> Belgium</td><td class="td">26 Jun</td><td class="tt">20:00</td><td class="tc">Vancouver</td><td class="tv">BC Place</td></tr>
+        <tr><td class="tn">65</td><td class="tg"><span class="gb">H</span></td><td class="tm">Cape Verde <span class="vs">v</span> Saudi Arabia</td><td class="td">26 Jun</td><td class="tt">19:00</td><td class="tc">Houston</td><td class="tv">NRG Stadium</td></tr>
+        <tr><td class="tn">66</td><td class="tg"><span class="gb">H</span></td><td class="tm">Uruguay <span class="vs">v</span> Spain</td><td class="td">26 Jun</td><td class="tt">18:00</td><td class="tc">Guadalajara</td><td class="tv">Estadio Akron</td></tr>
+        <tr><td class="tn">67</td><td class="tg"><span class="gb">L</span></td><td class="tm">Panama <span class="vs">v</span> England</td><td class="td">27 Jun</td><td class="tt">17:00</td><td class="tc">New York/NJ</td><td class="tv">MetLife Stadium</td></tr>
+        <tr><td class="tn">68</td><td class="tg"><span class="gb">L</span></td><td class="tm">Croatia <span class="vs">v</span> Ghana</td><td class="td">27 Jun</td><td class="tt">17:00</td><td class="tc">Philadelphia</td><td class="tv">Lincoln Financial Field</td></tr>
+        <tr><td class="tn">69</td><td class="tg"><span class="gb">J</span></td><td class="tm">Algeria <span class="vs">v</span> Austria</td><td class="td">27 Jun</td><td class="tt">21:00</td><td class="tc">Kansas City</td><td class="tv">Arrowhead Stadium</td></tr>
+        <tr><td class="tn">70</td><td class="tg"><span class="gb">J</span></td><td class="tm">Jordan <span class="vs">v</span> Argentina</td><td class="td">27 Jun</td><td class="tt">21:00</td><td class="tc">Dallas</td><td class="tv">AT&amp;T Stadium</td></tr>
+        <tr><td class="tn">71</td><td class="tg"><span class="gb">K</span></td><td class="tm">Colombia <span class="vs">v</span> Portugal</td><td class="td">27 Jun</td><td class="tt">19:30</td><td class="tc">Miami</td><td class="tv">Hard Rock Stadium</td></tr>
+        <tr><td class="tn">72</td><td class="tg"><span class="gb">K</span></td><td class="tm">IC Winner 1 <span class="vs">v</span> Uzbekistan</td><td class="td">27 Jun</td><td class="tt">19:30</td><td class="tc">Atlanta</td><td class="tv">Mercedes-Benz Stadium</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="phase">Round of 32 <small>Jun 28 – Jul 3</small></div>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>Match</th><th>Date</th><th>Time</th><th>City</th><th>Venue</th></tr></thead>
+      <tbody>
+        <tr><td class="tn">73</td><td class="tm">Group A Runners Up <span class="vs">v</span> Group B Runners Up</td><td class="td">28 Jun</td><td class="tt">12:00</td><td class="tc">Los Angeles</td><td class="tv">SoFi Stadium</td></tr>
+        <tr><td class="tn">74</td><td class="tm">Group E Winners <span class="vs">v</span> Group A/B/C/D/F 3rd</td><td class="td">29 Jun</td><td class="tt">16:30</td><td class="tc">Boston</td><td class="tv">Gillette Stadium</td></tr>
+        <tr><td class="tn">75</td><td class="tm">Group F Winners <span class="vs">v</span> Group C Runners Up</td><td class="td">29 Jun</td><td class="tt">19:00</td><td class="tc">Monterrey</td><td class="tv">Estadio BBVA</td></tr>
+        <tr><td class="tn">76</td><td class="tm">Group C Winners <span class="vs">v</span> Group F Runners Up</td><td class="td">29 Jun</td><td class="tt">12:00</td><td class="tc">Houston</td><td class="tv">NRG Stadium</td></tr>
+        <tr><td class="tn">77</td><td class="tm">Group I Winners <span class="vs">v</span> Group C/D/F/G/H 3rd</td><td class="td">30 Jun</td><td class="tt">17:00</td><td class="tc">New York/NJ</td><td class="tv">MetLife Stadium</td></tr>
+        <tr><td class="tn">78</td><td class="tm">Group E Runners Up <span class="vs">v</span> Group I Runners Up</td><td class="td">30 Jun</td><td class="tt">12:00</td><td class="tc">Dallas</td><td class="tv">AT&amp;T Stadium</td></tr>
+        <tr><td class="tn">79</td><td class="tm">Group A Winners <span class="vs">v</span> Group C/E/F/H/I 3rd</td><td class="td">30 Jun</td><td class="tt">19:00</td><td class="tc">Mexico City</td><td class="tv">Estadio Azteca</td></tr>
+        <tr><td class="tn">80</td><td class="tm">Group L Winners <span class="vs">v</span> Group E/H/I/J/K 3rd</td><td class="td">1 Jul</td><td class="tt">12:00</td><td class="tc">Atlanta</td><td class="tv">Mercedes-Benz Stadium</td></tr>
+        <tr><td class="tn">81</td><td class="tm">Group D Winners <span class="vs">v</span> Group B/E/F/I/J 3rd</td><td class="td">1 Jul</td><td class="tt">17:00</td><td class="tc">San Francisco Bay</td><td class="tv">Levi's Stadium</td></tr>
+        <tr><td class="tn">82</td><td class="tm">Group G Winners <span class="vs">v</span> Group A/E/H/I/J 3rd</td><td class="td">1 Jul</td><td class="tt">13:00</td><td class="tc">Seattle</td><td class="tv">Lumen Field</td></tr>
+        <tr><td class="tn">83</td><td class="tm">Group K Runners Up <span class="vs">v</span> Group L Runners Up</td><td class="td">2 Jul</td><td class="tt">19:00</td><td class="tc">Toronto</td><td class="tv">BMO Field</td></tr>
+        <tr><td class="tn">84</td><td class="tm">Group H Winners <span class="vs">v</span> Group J Runners Up</td><td class="td">2 Jul</td><td class="tt">12:00</td><td class="tc">Los Angeles</td><td class="tv">SoFi Stadium</td></tr>
+        <tr><td class="tn">85</td><td class="tm">Group B Winners <span class="vs">v</span> Group E/F/G/I/J 3rd</td><td class="td">2 Jul</td><td class="tt">20:00</td><td class="tc">Vancouver</td><td class="tv">BC Place</td></tr>
+        <tr><td class="tn">86</td><td class="tm">Group J Winners <span class="vs">v</span> Group H Runners Up</td><td class="td">3 Jul</td><td class="tt">18:00</td><td class="tc">Miami</td><td class="tv">Hard Rock Stadium</td></tr>
+        <tr><td class="tn">87</td><td class="tm">Group K Winners <span class="vs">v</span> Group D/E/I/J/L 3rd</td><td class="td">3 Jul</td><td class="tt">20:30</td><td class="tc">Kansas City</td><td class="tv">Arrowhead Stadium</td></tr>
+        <tr><td class="tn">88</td><td class="tm">Group D Runners Up <span class="vs">v</span> Group G Runners Up</td><td class="td">3 Jul</td><td class="tt">13:00</td><td class="tc">Dallas</td><td class="tv">AT&amp;T Stadium</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="phase">Round of 16 <small>Jul 4–7</small></div>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>Match</th><th>Date</th><th>Time</th><th>City</th><th>Venue</th></tr></thead>
+      <tbody>
+        <tr class="row-r16"><td class="tn">89</td><td class="tm">Match 74 Winner <span class="vs">v</span> Match 77 Winner</td><td class="td">4 Jul</td><td class="tt">17:00</td><td class="tc">Philadelphia</td><td class="tv">Lincoln Financial Field</td></tr>
+        <tr class="row-r16"><td class="tn">90</td><td class="tm">Match 73 Winner <span class="vs">v</span> Match 75 Winner</td><td class="td">4 Jul</td><td class="tt">12:00</td><td class="tc">Houston</td><td class="tv">NRG Stadium</td></tr>
+        <tr class="row-r16"><td class="tn">91</td><td class="tm">Match 76 Winner <span class="vs">v</span> Match 78 Winner</td><td class="td">5 Jul</td><td class="tt">16:00</td><td class="tc">New York/NJ</td><td class="tv">MetLife Stadium</td></tr>
+        <tr class="row-r16"><td class="tn">92</td><td class="tm">Match 79 Winner <span class="vs">v</span> Match 80 Winner</td><td class="td">5 Jul</td><td class="tt">18:00</td><td class="tc">Mexico City</td><td class="tv">Estadio Azteca</td></tr>
+        <tr class="row-r16"><td class="tn">93</td><td class="tm">Match 83 Winner <span class="vs">v</span> Match 84 Winner</td><td class="td">6 Jul</td><td class="tt">14:00</td><td class="tc">Dallas</td><td class="tv">AT&amp;T Stadium</td></tr>
+        <tr class="row-r16"><td class="tn">94</td><td class="tm">Match 81 Winner <span class="vs">v</span> Match 82 Winner</td><td class="td">6 Jul</td><td class="tt">17:00</td><td class="tc">Seattle</td><td class="tv">Lumen Field</td></tr>
+        <tr class="row-r16"><td class="tn">95</td><td class="tm">Match 86 Winner <span class="vs">v</span> Match 88 Winner</td><td class="td">7 Jul</td><td class="tt">12:00</td><td class="tc">Atlanta</td><td class="tv">Mercedes-Benz Stadium</td></tr>
+        <tr class="row-r16"><td class="tn">96</td><td class="tm">Match 85 Winner <span class="vs">v</span> Match 87 Winner</td><td class="td">7 Jul</td><td class="tt">13:00</td><td class="tc">Vancouver</td><td class="tv">BC Place</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="phase">Quarter-Finals <small>Jul 9–11</small></div>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>Match</th><th>Date</th><th>Time</th><th>City</th><th>Venue</th></tr></thead>
+      <tbody>
+        <tr class="row-qf"><td class="tn">97</td><td class="tm">Match 89 Winner <span class="vs">v</span> Match 90 Winner</td><td class="td">9 Jul</td><td class="tt">16:00</td><td class="tc">Boston</td><td class="tv">Gillette Stadium</td></tr>
+        <tr class="row-qf"><td class="tn">98</td><td class="tm">Match 93 Winner <span class="vs">v</span> Match 94 Winner</td><td class="td">10 Jul</td><td class="tt">12:00</td><td class="tc">Los Angeles</td><td class="tv">SoFi Stadium</td></tr>
+        <tr class="row-qf"><td class="tn">99</td><td class="tm">Match 91 Winner <span class="vs">v</span> Match 92 Winner</td><td class="td">11 Jul</td><td class="tt">17:00</td><td class="tc">Miami</td><td class="tv">Hard Rock Stadium</td></tr>
+        <tr class="row-qf"><td class="tn">100</td><td class="tm">Match 95 Winner <span class="vs">v</span> Match 96 Winner</td><td class="td">11 Jul</td><td class="tt">20:00</td><td class="tc">Kansas City</td><td class="tv">Arrowhead Stadium</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="phase">Semi-Finals <small>Jul 14–15</small></div>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>Match</th><th>Date</th><th>Time</th><th>City</th><th>Venue</th></tr></thead>
+      <tbody>
+        <tr class="row-sf"><td class="tn">101</td><td class="tm">Match 97 Winner <span class="vs">v</span> Match 98 Winner</td><td class="td">14 Jul</td><td class="tt">14:00</td><td class="tc">Dallas</td><td class="tv">AT&amp;T Stadium</td></tr>
+        <tr class="row-sf"><td class="tn">102</td><td class="tm">Match 99 Winner <span class="vs">v</span> Match 100 Winner</td><td class="td">15 Jul</td><td class="tt">15:00</td><td class="tc">Atlanta</td><td class="tv">Mercedes-Benz Stadium</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="phase">🏆 Third Place &amp; Final <small>Jul 18–19</small></div>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>Match</th><th>Date</th><th>Time</th><th>City</th><th>Venue</th></tr></thead>
+      <tbody>
+        <tr class="row-3p"><td class="tn">103</td><td class="tm">Third Place Play-Off</td><td class="td">18 Jul</td><td class="tt">17:00</td><td class="tc">Miami</td><td class="tv">Hard Rock Stadium</td></tr>
+        <tr class="row-fin"><td class="tn">104</td><td class="tm">⭐ THE FINAL ⭐</td><td class="td">19 Jul</td><td class="tt">15:00</td><td class="tc">New York/NJ</td><td class="tv">MetLife Stadium</td></tr>
+      </tbody>
+    </table></div>
+
+  </div>
+  <div class="sfooter">FIFA WORLD CUP 2026 · USA · CANADA · MEXICO · All times in local venue time</div>
+</div>
+
+<script>
+const kickoff = new Date('2026-06-11T15:00:00-05:00');
+function tick(){
+  const diff = kickoff - Date.now();
+  const pad  = n => String(Math.max(0,n)).padStart(2,'0');
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor(diff%86400000/3600000);
+  const m = Math.floor(diff%3600000/60000);
+  const s = Math.floor(diff%60000/1000);
+  // hero mini countdown
+  document.getElementById('h1').textContent = pad(d);
+  document.getElementById('h2').textContent = pad(h);
+  document.getElementById('h3').textContent = pad(m);
+  document.getElementById('h4').textContent = pad(s);
+  // schedule countdown
+  document.getElementById('s1').textContent = pad(d);
+  document.getElementById('s2').textContent = pad(h);
+  document.getElementById('s3').textContent = pad(m);
+  document.getElementById('s4').textContent = pad(s);
+}
+tick(); setInterval(tick,1000);
+</script>
+</body>
+</html>
